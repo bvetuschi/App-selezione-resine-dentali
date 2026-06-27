@@ -594,7 +594,7 @@ function renderCard(r){
   const mdrBadge=r.mdr?`<span class="mdr-badge">MDR ${r.mdr}</span>`:"";
   const imgUrl=getCardImage(r.name,r.apps);
   const imgHtml=imgUrl?`<img class="card-img" src="${imgUrl}" alt="${r.apps[0]}" loading="lazy">`:`<div class="card-img" style="background:linear-gradient(135deg,${r.color}22,${r.color}44)"></div>`;
-  return`<div class="card">${imgHtml}<div class="card-accent" style="background:${r.color}"></div><div class="card-body"><div class="card-brand-row"><span class="brand-badge" style="background:${r.color}">${r.brand}</span>${mdrBadge}</div><div class="card-name">${r.name}</div><div class="card-tagline">${r.tagline}</div><div class="card-desc">${r.desc}</div><div class="apps-row">${appChips}</div></div><div class="card-footer"><div class="printers-row">${printerPills}</div></div></div>`;
+  return`<div class="card">${imgHtml}<div class="card-accent" style="background:${r.color}"></div><div class="card-body"><div class="card-brand-row"><span class="brand-badge" style="background:${r.color}">${r.brand}</span>${mdrBadge}</div><div class="card-name">${r.name}</div><div class="card-tagline">${r.tagline}</div><div class="card-desc">${r.desc}</div><div class="apps-row">${appChips}</div></div><div class="card-footer"><div class="printers-row">${printerPills}</div><a class="card-contact-btn" href="${getContactMailto(r.name)}">✉️ Richiedi info / preventivo</a></div></div>`;
 }
 
 function render(){
