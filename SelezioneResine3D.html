@@ -446,7 +446,7 @@ legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
   const C = {
     'taberna':      { name:'Taberna Dentium Srl', sub:'Forniture Dentali', wrapW:'120px', imgH:'28px', logo:'img/clienti/Taberna%20Dentium%20Logo.png',       g:'linear-gradient(90deg,#1D7272 0%,#2B9B9B 50%,#3DBDBD 100%)', v:{'--blue':'#2B9B9B','--blue-dark':'#1D7272','--teal':'#1D9090','--teal-light':'#E0F5F5'} },
     'blu-dental':   { name:'Blu Dental Group Srl',      sub:'', wrapW:'110px', imgH:'28px', logo:'img/clienti/Blu%20Dental%20Group%20Logo%20Vettoriale.jpeg',    g:'linear-gradient(90deg,#0E2F6B 0%,#1A4BA0 50%,#2060C0 100%)', v:{'--blue':'#1A4BA0','--blue-dark':'#0E2F6B','--teal':'#2060C0','--teal-light':'#E3EEFF'} },
-    'dentacom':     { name:'Dentacom Srl',              sub:'Tecnologie Dentali Avanzate', wrapW:'220px', imgH:'44px', imgW:'100%', logo:'img/clienti/Logo%20DentacomCMYK%5B1%5D.jpg',    g:'linear-gradient(90deg,#0F2347 0%,#1B3A6B 50%,#2B5FA0 100%)', v:{'--blue':'#1B3A6B','--blue-dark':'#0F2347','--teal':'#2B5FA0','--teal-light':'#E5EBF5'} },
+    'dentacom':     { name:'Dentacom Srl',              sub:'Tecnologie Dentali Avanzate', wrapW:'150px', imgH:'44px', imgW:'100%', autoCrop:true, logo:'img/clienti/Logo%20DentacomCMYK%5B1%5D.jpg',    g:'linear-gradient(90deg,#0F2347 0%,#1B3A6B 50%,#2B5FA0 100%)', v:{'--blue':'#1B3A6B','--blue-dark':'#0F2347','--teal':'#2B5FA0','--teal-light':'#E5EBF5'} },
     'master-tecnik':{ name:'Master Tecnik Srl',         sub:'Tecnologie Dentali', wrapW:'110px', imgH:'28px', logo:'img/clienti/Master_Tecnik_Logo%20Nuovo.jpg', g:'linear-gradient(90deg,#1A4A8A 0%,#2366B4 60%,#3D3D3D 100%)', v:{'--blue':'#2366B4','--blue-dark':'#1A4A8A','--teal':'#2366B4','--teal-light':'#E3EEFF'} }
   };
   const k = new URLSearchParams(window.location.search).get('client');
@@ -458,7 +458,9 @@ legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
     const hdr = document.querySelector('header');
     if (hdr) hdr.style.background = cfg.g;
     const lm = document.querySelector('.logo-mark');
-    if (lm) { const w=document.createElement('div'); w.className='client-logo-wrap'; if(cfg.wrapW){w.style.maxWidth=cfg.wrapW;w.style.minWidth=cfg.wrapW;} const imgEl=document.createElement('img'); imgEl.src=cfg.logo; imgEl.alt=cfg.name; if(cfg.imgH)imgEl.style.maxHeight=cfg.imgH; if(cfg.imgW)imgEl.style.width=cfg.imgW; w.appendChild(imgEl); lm.replaceWith(w); }
+    if (lm) { const w=document.createElement('div'); w.className='client-logo-wrap'; if(cfg.wrapW){w.style.maxWidth=cfg.wrapW;w.style.minWidth=cfg.wrapW;} const imgEl=document.createElement('img'); imgEl.src=cfg.logo; imgEl.alt=cfg.name; if(cfg.imgH)imgEl.style.maxHeight=cfg.imgH; if(cfg.imgW)imgEl.style.width=cfg.imgW;
+           if(cfg.autoCrop){imgEl.crossOrigin='anonymous';imgEl.addEventListener('load',function(){try{const cv=document.createElement('canvas');const cx=cv.getContext('2d');cv.width=imgEl.naturalWidth;cv.height=imgEl.naturalHeight;cx.drawImage(imgEl,0,0);const d=cx.getImageData(0,0,cv.width,cv.height).data;let x0=cv.width,x1=0,y0=cv.height,y1=0;for(let y=0;y<cv.height;y++){for(let x=0;x<cv.width;x++){const i=(y*cv.width+x)*4;if(d[i]<235||d[i+1]<235||d[i+2]<235){if(x<x0)x0=x;if(x>x1)x1=x;if(y<y0)y0=y;if(y>y1)y1=y;}}}if(x1>x0&&y1>y0){const p=8,cw=x1-x0+2*p,ch=y1-y0+2*p,cc=document.createElement('canvas');cc.width=cw;cc.height=ch;cc.getContext('2d').drawImage(cv,x0-p,y0-p,cw,ch,0,0,cw,ch);imgEl.src=cc.toDataURL('image/jpeg',0.95);}}catch(e){}});}
+           w.appendChild(imgEl); lm.replaceWith(w); }
     const t = document.querySelector('.header-title'); if (t) t.textContent = cfg.name;
     const s = document.querySelector('.header-sub'); if (s) s.textContent = cfg.sub;
     document.title = cfg.name + ' — Selezione Resine 3D';
