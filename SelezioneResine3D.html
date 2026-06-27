@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selezione Resine Dentali 3D — Dentacom Srl</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1A4E8F;
+    --blue-dark: #123568;
+    --teal: #0097A7;
+    --teal-light: #E0F7FA;
+    --gray-100: #F4F6F9;
+    --gray-200: #E8ECF1;
+    --gray-400: #9EABBE;
+    --gray-600: #5A6A7E;
+    --gray-800: #2C3E50;
+    --white: #FFFFFF;
+    --brand-asiga: #E67E22;
+    --brand-formlabs: #1A1A1A;
+    --brand-voco: #27AE60;
+    --brand-bego: #C0392B;
+    --brand-detax: #7B1FA2;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(26,78,143,0.08);
+    --shadow-hover: 0 6px 24px rgba(26,78,143,0.15);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-800);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--blue);
+    color: white;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 36px; height: 36px;
+    background: white;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; color: var(--blue); font-size: 15px; letter-spacing: -0.5px;
+  }
+  .header-title { font-size: 17px; font-weight: 600; }
+  .header-sub { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 1px; }
+  .header-count {
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+  }
+  .header-count span { font-weight: 700; color: white; }
+
+  /* LAYOUT */
+  .layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    min-height: calc(100vh - 64px);
+  }
+
+  /* SIDEBAR */
+  aside {
+    background: white;
+    border-right: 1px solid var(--gray-200);
+    padding: 24px 20px;
+    position: sticky;
+    top: 64px;
+    height: calc(100vh - 64px);
+    overflow-y: auto;
+  }
+  .filter-section { margin-bottom: 28px; }
+  .filter-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--gray-400);
+    margin-bottom: 10px;
+  }
+
+  /* SEARCH */
+  .search-box {
+    width: 100%;
+    padding: 9px 14px 9px 36px;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--gray-800);
+    background: var(--gray-100) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' viewBox='0 0 24 24' fill='none' stroke='%239EABBE' stroke-width='2.5'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E") no-repeat 11px center;
+    outline: none;
+    transition: border-color 0.2s;
+    margin-bottom: 20px;
+  }
+  .search-box:focus { border-color: var(--blue); background-color: white; }
+
+  /* FILTER CHIPS */
+  .chip-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1.5px solid var(--gray-200);
+    background: var(--gray-100);
+    font-size: 12px;
+    color: var(--gray-600);
+    cursor: pointer;
+    transition: all 0.15s;
+    user-select: none;
+    line-height: 1.4;
+  }
+  .chip:hover { border-color: var(--blue); color: var(--blue); }
+  .chip.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+    font-weight: 600;
+  }
+
+  /* Printer chips with brand colors */
+  .chip.asiga.active    { background: var(--brand-asiga); border-color: var(--brand-asiga); }
+  .chip.formlabs.active { background: var(--brand-formlabs); border-color: var(--brand-formlabs); }
+
+  /* Brand filter chips */
+  .chip.b-asiga.active    { background: var(--brand-asiga); border-color: var(--brand-asiga); }
+  .chip.b-formlabs.active { background: var(--brand-formlabs); border-color: var(--brand-formlabs); }
+  .chip.b-voco.active     { background: var(--brand-voco); border-color: var(--brand-voco); }
+  .chip.b-bego.active     { background: var(--brand-bego); border-color: var(--brand-bego); }
+  .chip.b-detax.active    { background: var(--brand-detax); border-color: var(--brand-detax); }
+
+  /* Reset */
+  .reset-btn {
+    width: 100%;
+    padding: 9px;
+    border-radius: 8px;
+    border: 1.5px solid var(--gray-200);
+    background: none;
+    color: var(--gray-600);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 4px;
+  }
+  .reset-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+  /* MAIN */
+  main {
+    padding: 28px;
+    overflow-y: auto;
+  }
+
+  /* SORT BAR */
+  .sort-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .sort-bar-left { font-size: 14px; color: var(--gray-600); }
+  .sort-bar-left strong { color: var(--gray-800); }
+  .sort-select {
+    padding: 6px 10px;
+    border-radius: 7px;
+    border: 1.5px solid var(--gray-200);
+    font-size: 13px;
+    color: var(--gray-700);
+    background: white;
+    cursor: pointer;
+    outline: none;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 18px;
+  }
+
+  /* CARD */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
+  .card-accent {
+    height: 4px;
+  }
+  .card-body { padding: 18px 18px 14px; flex: 1; }
+  .card-footer { padding: 0 18px 16px; }
+
+  .card-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .brand-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 20px;
+    color: white;
+  }
+  .mdr-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    background: var(--teal-light);
+    color: var(--teal);
+    border: 1px solid var(--teal);
+  }
+
+  .card-name { font-size: 17px; font-weight: 700; color: var(--gray-800); margin-bottom: 4px; }
+  .card-tagline { font-size: 12px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 10px; }
+  .card-desc { font-size: 13px; color: var(--gray-600); line-height: 1.6; margin-bottom: 14px; }
+
+  .apps-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 12px;
+  }
+  .app-chip {
+    font-size: 11px;
+    padding: 3px 9px;
+    background: #EEF3FB;
+    color: var(--blue);
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .printers-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .printer-pill {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: 1.5px solid;
+  }
+  .printer-pill.asiga    { color: var(--brand-asiga); border-color: #F5CBA7; background: #FEF9F5; }
+  .printer-pill.formlabs { color: #333; border-color: #CACACA; background: #F7F7F7; }
+
+  /* EMPTY STATE */
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-400);
+  }
+  .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty h3 { font-size: 18px; color: var(--gray-600); margin-bottom: 6px; }
+  .empty p { font-size: 14px; }
+
+  /* SCROLLBAR */
+  aside::-webkit-scrollbar { width: 4px; }
+  aside::-webkit-scrollbar-track { background: transparent; }
+  aside::-webkit-scrollbar-thumb { background: var(--gray-200); border-radius: 4px; }
+
+  @media (max-width: 768px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; border-right: none; border-bottom: 1px solid var(--gray-200); }
+    main { padding: 16px; }
+    header { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <div class="logo-mark">DC</div>
+    <div>
+      <div class="header-title">Selezione Resine Dentali 3D</div>
+      <div class="header-sub">Dentacom Srl — Catalogo 2026</div>
+    </div>
+  </div>
+  <div class="header-count"><span id="count">0</span> resine trovate</div>
+</header>
+
+<div class="layout">
+
+  <!-- SIDEBAR FILTRI -->
+  <aside>
+    <input class="search-box" type="text" id="search" placeholder="Cerca resina o prodotto…">
+
+    <div class="filter-section">
+      <div class="filter-label">Applicazione Clinica</div>
+      <div class="chip-group" id="app-filter"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Stampante</div>
+      <div class="chip-group" id="printer-filter"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Brand Resina</div>
+      <div class="chip-group" id="brand-filter"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Certificazione</div>
+      <div class="chip-group" id="mdr-filter"></div>
+    </div>
+
+    <button class="reset-btn" id="reset-btn">↺ Azzera filtri</button>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <div class="sort-bar">
+      <div class="sort-bar-left">Mostrate <strong id="count2">0</strong> resine</div>
+      <select class="sort-select" id="sort-select">
+        <option value="brand">Ordina per Brand</option>
+        <option value="name">Ordina per Nome</option>
+        <option value="app">Ordina per Applicazione</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+  </main>
+
+</div>
+
+<script>
+// =========================================================
+// DATI RESINE
+// =========================================================
+const RESINS = [
+
+  // ── ASIGA ──────────────────────────────────────────────
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaMODEL",
+    tagline: "Modelli di Studio",
+    desc: "Altissima precisione dimensionale per modelli anatomici di studio e di lavoro. Superfici lisce per riproduzioni fedeli del marzocchino.",
+    apps: ["Modelli di studio", "Modelli di lavoro"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaSTUDY",
+    tagline: "Modelli Diagnostici",
+    desc: "Resina bianca economica per modelli diagnostici e comunicazione col paziente. Alta produttività grazie a tempi di stampa ridotti.",
+    apps: ["Modelli di studio", "Modelli diagnostici"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaFORM Beige",
+    tagline: "Modelli & Mock-up (Beige)",
+    desc: "Resina rigida color beige che simula il gesso tradizionale. Ideale per mock-up diagnostici, modelli occlusali e prototipi estetici.",
+    apps: ["Modelli di studio", "Mock-up estetici", "Modelli per allineatori"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaFORM Grey",
+    tagline: "Modelli & Mock-up (Grigio)",
+    desc: "Versione grigio scuro di DentaFORM per migliorare la visibilità dei dettagli occlusali durante analisi morfologica e planning implantare.",
+    apps: ["Modelli di studio", "Mock-up estetici", "Modelli per allineatori"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaGUIDE",
+    tagline: "Guide Chirurgiche",
+    desc: "Resina rigida e sterilizzabile per guide chirurgiche implantari. Alta resistenza meccanica durante la chirurgia, biocompatibile per uso intraoral.",
+    apps: ["Guide chirurgiche"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaTOOTH",
+    tagline: "Restauri Provvisori",
+    desc: "Resina per corone, ponti e restauri provvisori ad arcata completa. Eccellente resistenza alla flessione e all'abrasione. Disponibile in tonalità VITA.",
+    apps: ["Restauri provvisori", "Corone e ponti provvisori"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaBASE",
+    tagline: "Basi Protesi Rimovibili",
+    desc: "Resina rigida ad alta resistenza per basi protesiche complete e parziali. Finitura superficiale eccellente, compatibile con denti in resina e ceramica.",
+    apps: ["Protesi rimovibili", "Basi per protesi"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaGUM",
+    tagline: "Simulazione Gengivale",
+    desc: "Resina flessibile color gengiva per maschere gengivali su modelli ibridi. Permette simulazione dei tessuti molli per pianificazione implantare realistica.",
+    apps: ["Maschere gengivali"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaTRAY",
+    tagline: "Portaimpronte Personalizzati",
+    desc: "Resina trasparente per cucchiai individuali per impronte di precisione. Leggera, rigida, compatibile con tutti i principali materiali da impronta.",
+    apps: ["Portaimpronte personalizzati"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaTRAY Orange",
+    tagline: "Portaimpronte (Arancio)",
+    desc: "Variante arancione fluorescente per maggiore visibilità in sala e identificazione immediata in laboratorio. Stesse proprietà meccaniche della versione trasparente.",
+    apps: ["Portaimpronte personalizzati"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaTRY",
+    tagline: "Prove Estetiche Try-in",
+    desc: "Resina per la stampa di try-in provvisorie. Permette la prova estetica e funzionale prima della realizzazione definitiva, riducendo i tempi clinici.",
+    apps: ["Try-in / Prove estetiche"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaCAST",
+    tagline: "Calcinabile per Fusione",
+    desc: "Resina bruciabile senza residui per fusione a cera persa. Alta precisione dimensionale e assenza di ceneri per colate perfettamente pulite.",
+    apps: ["Calcinabili", "Fusione a cera persa"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#E67E22"
+  },
+  {
+    brand: "ASIGA",
+    brandKey: "asiga",
+    name: "DentaIBT",
+    tagline: "Incollaggio Indiretto Bracket",
+    desc: "Resina rigida per vassoi di incollaggio indiretto in ortodonzia. Precisione di posizionamento dei bracket, flusso di lavoro digitale completo.",
+    apps: ["Incollaggio indiretto bracket (IBT)"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: null,
+    color: "#E67E22"
+  },
+
+  // ── FORMLABS ───────────────────────────────────────────
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Precision Model Resin",
+    tagline: "Modelli ad Alta Precisione",
+    desc: "Resina per modelli di studio e di lavoro con dettaglio superficiale elevato. 99,7% delle superfici entro 100 µm dal CAD originale.",
+    apps: ["Modelli di lavoro", "Modelli di studio"],
+    printers: [
+      { label: "Form 4", type: "formlabs" },
+      { label: "Form 4L", type: "formlabs" }
+    ],
+    mdr: null,
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Fast Model Resin",
+    tagline: "Modelli Rapidi / Allineatori",
+    desc: "Resina rapida per modelli diagnostici, ortodontici e per termoformatura allineatori. 11 modelli in 8 minuti — la scelta ideale per laboratori ad alto volume.",
+    apps: ["Modelli diagnostici", "Modelli per allineatori", "Modelli di studio"],
+    printers: [
+      { label: "Form 4", type: "formlabs" },
+      { label: "Form 4L", type: "formlabs" }
+    ],
+    mdr: null,
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Flexible 80A Resin",
+    tagline: "Maschere Gengivali",
+    desc: "Resina flessibile per maschere gengivali su modelli ibridi. Richiede pigmenti (Magenta + Bianco + Giallo) per ottenere il colore rosa gengiva.",
+    apps: ["Maschere gengivali"],
+    printers: [
+      { label: "Form 4", type: "formlabs" },
+      { label: "Form 4L", type: "formlabs" }
+    ],
+    mdr: null,
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Castable Wax Resin",
+    tagline: "Calcinabile per Fusione/Pressatura",
+    desc: "Resina calcinabile per fusione a cera persa e pressatura ceramica. Si vaporizza completamente senza residui — colate e pressate pulite.",
+    apps: ["Calcinabili", "Fusione a cera persa"],
+    printers: [
+      { label: "Form 4", type: "formlabs" },
+      { label: "Form 4L", type: "formlabs" }
+    ],
+    mdr: null,
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Surgical Guide Resin",
+    tagline: "Dime Chirurgiche Implantari",
+    desc: "Resina rigida e sterilizzabile per guide chirurgiche implantari. Alta resistenza meccanica durante la chirurgia. Certificata Classe Ia MDR.",
+    apps: ["Guide chirurgiche"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe Ia",
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "IBT Flex Resin",
+    tagline: "Incollaggio Indiretto Bracket",
+    desc: "Resina per vassoi di incollaggio indiretto bracket e per iniezione diretta di compositi. Flessibilità ottimale per rimozione atraumatica del vassoio.",
+    apps: ["Incollaggio indiretto bracket (IBT)"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Dental LT Clear v2",
+    tagline: "Bite e Placche Occlusali Rigidi",
+    desc: "Resina trasparente ad alta resistenza per bite notturni e placche occlusali rigide. Alta trasmittanza, bordi nitidi, lunga durata in cavità orale.",
+    apps: ["Bite e placche occlusali rigidi"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Dental LT Comfort",
+    tagline: "Bite e Placche Occlusali Flessibili",
+    desc: "Resina flessibile per bite con comfort superiore. Proprietà elastiche per migliore tolleranza articolare e adattamento al paziente.",
+    apps: ["Bite e placche occlusali flessibili"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#1A1A1A"
+  },
+  {
+    brand: "FORMLABS",
+    brandKey: "formlabs",
+    name: "Premium Teeth HT",
+    tagline: "Denti per Protesi / Restauri Provvisori",
+    desc: "Resina ad alta traslucenza per denti protesici e restauri provvisori di lunga durata. Estetica naturale e resistenza meccanica eccellente.",
+    apps: ["Restauri provvisori", "Protesi rimovibili"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#1A1A1A"
+  },
+
+  // ── DETAX ──────────────────────────────────────────────
+  {
+    brand: "DETAX",
+    brandKey: "detax",
+    name: "Freeprint Crown",
+    tagline: "Corone e Ponti Definitivi",
+    desc: "Resina per restauri definitivi in corone e ponti. Elevata resistenza meccanica e stabilità cromatica nel tempo per restauri mono-strato estetici.",
+    apps: ["Restauri definitivi", "Corone e ponti definitivi"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" },
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" }
+    ],
+    mdr: "Classe IIa",
+    color: "#7B1FA2"
+  },
+  {
+    brand: "DETAX",
+    brandKey: "detax",
+    name: "dx direct aligner",
+    tagline: "Allineatori Stampati Direttamente",
+    desc: "Resina trasparente per la stampa diretta di allineatori ortodontici senza termoformatura. Elimina il passaggio del modello fisico nel workflow allineatori.",
+    apps: ["Allineatori diretti", "Ortodonzia"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#7B1FA2"
+  },
+  {
+    brand: "DETAX",
+    brandKey: "detax",
+    name: "dx denture flex",
+    tagline: "Protesi Parziali Flessibili",
+    desc: "Resina flessibile per protesi parziali rimovibili ad uso definitivo. Comfort ottimale, adesione alle mucose, biocompatibile per contatto prolungato.",
+    apps: ["Protesi rimovibili", "Protesi parziali flessibili"],
+    printers: [
+      { label: "Form 4B", type: "formlabs" },
+      { label: "Form 4BL", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#7B1FA2"
+  },
+
+  // ── VOCO ───────────────────────────────────────────────
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print SG",
+    tagline: "Dime Chirurgiche Implantari",
+    desc: "Resina per guide chirurgiche implantari. Sterilizzabile, biocompatibile e certificata Classe Ia. Precisione geometrica per un posizionamento sicuro degli impianti.",
+    apps: ["Guide chirurgiche"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe Ia",
+    color: "#27AE60"
+  },
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print splint 2.0",
+    tagline: "Bite e Placche Occlusali Rigidi",
+    desc: "Resina rigida per bite e placche occlusali rigide. Translucenza ottimale, alta resistenza all'abrasione. Certificata Classe IIa.",
+    apps: ["Bite e placche occlusali rigidi"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#27AE60"
+  },
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print splint comfort",
+    tagline: "Bite e Placche Occlusali Flessibili",
+    desc: "Resina flessibile per bite con comfort superiore. Proprietà elastiche per maggiore tolleranza articolare. Certificata Classe IIa per uso intraoral prolungato.",
+    apps: ["Bite e placche occlusali flessibili"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#27AE60"
+  },
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print c&b temp",
+    tagline: "Corone e Ponti Provvisori",
+    desc: "Resina per corone e ponti provvisori. Disponibile in diverse tonalità, con opzioni per tinte aggiuntive o specifiche meccaniche superiori. Certificata Classe IIa.",
+    apps: ["Restauri provvisori", "Corone e ponti provvisori"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#27AE60"
+  },
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print Try-In",
+    tagline: "Prove Estetiche Try-in",
+    desc: "Resina rigida per prove estetiche e provini per protesi parziali o totali. Permette di validare estetica e funzione prima della realizzazione definitiva. Certificata Classe Ia.",
+    apps: ["Try-in / Prove estetiche"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe Ia",
+    color: "#27AE60"
+  },
+  {
+    brand: "VOCO",
+    brandKey: "voco",
+    name: "V-Print dentbase",
+    tagline: "Basi per Protesi Totale",
+    desc: "Resina rigida per basi di protesi totale. Resistenza meccanica elevata, stabilità dimensionale e finitura superficiale ottimale. Certificata Classe IIa.",
+    apps: ["Protesi rimovibili", "Basi per protesi"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#27AE60"
+  },
+
+  // ── BEGO ───────────────────────────────────────────────
+  {
+    brand: "BEGO",
+    brandKey: "bego",
+    name: "VarseoSmile Temp",
+    tagline: "Corone e Ponti Provvisori",
+    desc: "Resina per corone e ponti provvisori con stabilità cromatica superiore. Alternativa per laboratori che richiedono tinte aggiuntive o specifiche meccaniche elevate. Certificata Classe IIa.",
+    apps: ["Restauri provvisori", "Corone e ponti provvisori"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#C0392B"
+  },
+  {
+    brand: "BEGO",
+    brandKey: "bego",
+    name: "VarseoSmile Crown plus",
+    tagline: "Corone e Ponti Definitivi",
+    desc: "Resina per restauri definitivi monolitici in corone e ponti. Alta traslucenza e resistenza meccanica per risultati estetici di lungo periodo. Certificata Classe IIa.",
+    apps: ["Restauri definitivi", "Corone e ponti definitivi"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#C0392B"
+  },
+  {
+    brand: "BEGO",
+    brandKey: "bego",
+    name: "VarseoSmile TriniQ",
+    tagline: "Ponti fino a 3 Elementi (Definitivi)",
+    desc: "Resina per corone e ponti definitivi fino a 3 elementi. Resistenza alla flessione certificata per applicazioni multi-unità. Certificata Classe IIa.",
+    apps: ["Restauri definitivi", "Corone e ponti definitivi"],
+    printers: [
+      { label: "Asiga Max 2", type: "asiga" },
+      { label: "Asiga Ultra", type: "asiga" },
+      { label: "Form 4B", type: "formlabs" }
+    ],
+    mdr: "Classe IIa",
+    color: "#C0392B"
+  },
+];
+
+// =========================================================
+// FILTER STATE
+// =========================================================
+let activeApps     = new Set();
+let activePrinters = new Set();
+let activeBrands   = new Set();
+let activeMdr      = new Set();
+let searchTerm     = "";
+let sortKey        = "brand";
+
+// =========================================================
+// BUILD FILTER OPTIONS
+// =========================================================
+function getAllApps() {
+  const s = new Set();
+  RESINS.forEach(r => r.apps.forEach(a => s.add(a)));
+  return [...s].sort();
+}
+function getAllPrinters() {
+  const s = new Set();
+  RESINS.forEach(r => r.printers.forEach(p => s.add(p.label)));
+  return [...s];
+}
+function getAllBrands() {
+  const s = new Set();
+  RESINS.forEach(r => s.add(r.brand));
+  return [...s].sort();
+}
+
+function buildChips(containerId, items, activeSet, extraClass = "") {
+  const el = document.getElementById(containerId);
+  el.innerHTML = "";
+  items.forEach(item => {
+    const chip = document.createElement("div");
+    chip.className = "chip" + (extraClass ? " " + extraClass : "");
+    chip.textContent = item;
+    if (activeSet.has(item)) chip.classList.add("active");
+    chip.addEventListener("click", () => {
+      if (activeSet.has(item)) activeSet.delete(item);
+      else activeSet.add(item);
+      chip.classList.toggle("active");
+      render();
+    });
+    el.appendChild(chip);
+  });
+}
+
+function buildPrinterChips() {
+  const printers = [
+    { label: "Asiga Max 2", type: "asiga" },
+    { label: "Asiga Ultra", type: "asiga" },
+    { label: "Form 4", type: "formlabs" },
+    { label: "Form 4B", type: "formlabs" },
+    { label: "Form 4L", type: "formlabs" },
+    { label: "Form 4BL", type: "formlabs" },
+  ];
+  const el = document.getElementById("printer-filter");
+  el.innerHTML = "";
+  printers.forEach(p => {
+    const chip = document.createElement("div");
+    chip.className = `chip ${p.type}`;
+    chip.textContent = p.label;
+    if (activePrinters.has(p.label)) chip.classList.add("active");
+    chip.addEventListener("click", () => {
+      if (activePrinters.has(p.label)) activePrinters.delete(p.label);
+      else activePrinters.add(p.label);
+      chip.classList.toggle("active");
+      render();
+    });
+    el.appendChild(chip);
+  });
+}
+
+function buildBrandChips() {
+  const brands = [
+    { name: "ASIGA", key: "b-asiga" },
+    { name: "FORMLABS", key: "b-formlabs" },
+    { name: "VOCO", key: "b-voco" },
+    { name: "BEGO", key: "b-bego" },
+    { name: "DETAX", key: "b-detax" },
+  ];
+  const el = document.getElementById("brand-filter");
+  el.innerHTML = "";
+  brands.forEach(b => {
+    const chip = document.createElement("div");
+    chip.className = `chip ${b.key}`;
+    chip.textContent = b.name;
+    if (activeBrands.has(b.name)) chip.classList.add("active");
+    chip.addEventListener("click", () => {
+      if (activeBrands.has(b.name)) activeBrands.delete(b.name);
+      else activeBrands.add(b.name);
+      chip.classList.toggle("active");
+      render();
+    });
+    el.appendChild(chip);
+  });
+}
+
+// =========================================================
+// FILTER LOGIC
+// =========================================================
+function filterResins() {
+  return RESINS.filter(r => {
+    if (activeApps.size > 0) {
+      const match = [...activeApps].some(a => r.apps.includes(a));
+      if (!match) return false;
+    }
+    if (activePrinters.size > 0) {
+      const match = [...activePrinters].some(p => r.printers.map(x => x.label).includes(p));
+      if (!match) return false;
+    }
+    if (activeBrands.size > 0 && !activeBrands.has(r.brand)) return false;
+    if (activeMdr.size > 0) {
+      if (activeMdr.has("Solo certificati MDR") && !r.mdr) return false;
+    }
+    if (searchTerm) {
+      const q = searchTerm.toLowerCase();
+      if (!r.name.toLowerCase().includes(q) &&
+          !r.brand.toLowerCase().includes(q) &&
+          !r.tagline.toLowerCase().includes(q) &&
+          !r.desc.toLowerCase().includes(q) &&
+          !r.apps.join(" ").toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+}
+
+function sortResins(list) {
+  return [...list].sort((a, b) => {
+    if (sortKey === "name") return a.name.localeCompare(b.name);
+    if (sortKey === "app") return a.apps[0].localeCompare(b.apps[0]);
+    return a.brand.localeCompare(b.brand) || a.name.localeCompare(b.name);
+  });
+}
+
+// =========================================================
+// RENDER CARDS
+// =========================================================
+function renderCard(r) {
+  const appChips = r.apps.map(a => `<span class="app-chip">${a}</span>`).join("");
+  const printerPills = r.printers.map(p =>
+    `<span class="printer-pill ${p.type}">${p.label}</span>`
+  ).join("");
+  const mdrBadge = r.mdr ? `<span class="mdr-badge">MDR ${r.mdr}</span>` : "";
+  return `
+    <div class="card">
+      <div class="card-accent" style="background:${r.color}"></div>
+      <div class="card-body">
+        <div class="card-brand-row">
+          <span class="brand-badge" style="background:${r.color}">${r.brand}</span>
+          ${mdrBadge}
+        </div>
+        <div class="card-name">${r.name}</div>
+        <div class="card-tagline">${r.tagline}</div>
+        <div class="card-desc">${r.desc}</div>
+        <div class="apps-row">${appChips}</div>
+      </div>
+      <div class="card-footer">
+        <div class="printers-row">${printerPills}</div>
+      </div>
+    </div>
+  `;
+}
+
+// =========================================================
+// RENDER
+// =========================================================
+function render() {
+  const filtered = filterResins();
+  const sorted = sortResins(filtered);
+  const grid = document.getElementById("grid");
+  document.getElementById("count").textContent = sorted.length;
+  document.getElementById("count2").textContent = sorted.length;
+
+  if (sorted.length === 0) {
+    grid.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🔍</div>
+        <h3>Nessuna resina trovata</h3>
+        <p>Prova a modificare o azzerare i filtri applicati.</p>
+      </div>`;
+  } else {
+    grid.innerHTML = sorted.map(renderCard).join("");
+  }
+}
+
+// =========================================================
+// INIT
+// =========================================================
+document.addEventListener("DOMContentLoaded", () => {
+  buildChips("app-filter", getAllApps(), activeApps);
+  buildPrinterChips();
+  buildBrandChips();
+
+  // MDR filter
+  const mdrEl = document.getElementById("mdr-filter");
+  const mdrChip = document.createElement("div");
+  mdrChip.className = "chip";
+  mdrChip.textContent = "Solo certificati MDR";
+  mdrChip.addEventListener("click", () => {
+    if (activeMdr.has("Solo certificati MDR")) {
+      activeMdr.delete("Solo certificati MDR");
+    } else {
+      activeMdr.add("Solo certificati MDR");
+    }
+    mdrChip.classList.toggle("active");
+    render();
+  });
+  mdrEl.appendChild(mdrChip);
+
+  // Search
+  document.getElementById("search").addEventListener("input", e => {
+    searchTerm = e.target.value.trim();
+    render();
+  });
+
+  // Sort
+  document.getElementById("sort-select").addEventListener("change", e => {
+    sortKey = e.target.value;
+    render();
+  });
+
+  // Reset
+  document.getElementById("reset-btn").addEventListener("click", () => {
+    activeApps.clear(); activePrinters.clear(); activeBrands.clear(); activeMdr.clear();
+    searchTerm = "";
+    document.getElementById("search").value = "";
+    document.querySelectorAll(".chip.active").forEach(c => c.classList.remove("active"));
+    render();
+  });
+
+  render();
+});
+</script>
+
+</body>
+</html>
