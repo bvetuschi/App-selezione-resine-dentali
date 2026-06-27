@@ -444,10 +444,10 @@ legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
 // =========================================================
 (function() {
   const C = {
-    'taberna':      { name:'Taberna Dentium Srl', sub:'Forniture Dentali',        logo:'img/clienti/Taberna%20Dentium%20Logo.png',       g:'linear-gradient(90deg,#1D7272 0%,#2B9B9B 50%,#3DBDBD 100%)', v:{'--blue':'#2B9B9B','--blue-dark':'#1D7272','--teal':'#1D9090','--teal-light':'#E0F5F5'} },
-    'blu-dental':   { name:'Blu Dental Group Srl',      sub:'',           logo:'img/clienti/Blu%20Dental%20Group%20Logo%20Vettoriale.jpeg',    g:'linear-gradient(90deg,#0E2F6B 0%,#1A4BA0 50%,#2060C0 100%)', v:{'--blue':'#1A4BA0','--blue-dark':'#0E2F6B','--teal':'#2060C0','--teal-light':'#E3EEFF'} },
-    'dentacom':     { name:'Dentacom Srl',              sub:'Tecnologie Dentali Avanzate',logo:'img/clienti/Logo%20DentacomCMYK%5B1%5D.jpg',    g:'linear-gradient(90deg,#0F2347 0%,#1B3A6B 50%,#2B5FA0 100%)', v:{'--blue':'#1B3A6B','--blue-dark':'#0F2347','--teal':'#2B5FA0','--teal-light':'#E5EBF5'} },
-    'master-tecnik':{ name:'Master Tecnik Srl',         sub:'Tecnologie Dentali',       logo:'img/clienti/Master_Tecnik_Logo%20Nuovo.jpg', g:'linear-gradient(90deg,#1A4A8A 0%,#2366B4 60%,#3D3D3D 100%)', v:{'--blue':'#2366B4','--blue-dark':'#1A4A8A','--teal':'#2366B4','--teal-light':'#E3EEFF'} }
+    'taberna':      { name:'Taberna Dentium Srl', sub:'Forniture Dentali', wrapW:'120px', imgH:'28px', logo:'img/clienti/Taberna%20Dentium%20Logo.png',       g:'linear-gradient(90deg,#1D7272 0%,#2B9B9B 50%,#3DBDBD 100%)', v:{'--blue':'#2B9B9B','--blue-dark':'#1D7272','--teal':'#1D9090','--teal-light':'#E0F5F5'} },
+    'blu-dental':   { name:'Blu Dental Group Srl',      sub:'', wrapW:'110px', imgH:'28px', logo:'img/clienti/Blu%20Dental%20Group%20Logo%20Vettoriale.jpeg',    g:'linear-gradient(90deg,#0E2F6B 0%,#1A4BA0 50%,#2060C0 100%)', v:{'--blue':'#1A4BA0','--blue-dark':'#0E2F6B','--teal':'#2060C0','--teal-light':'#E3EEFF'} },
+    'dentacom':     { name:'Dentacom Srl',              sub:'Tecnologie Dentali Avanzate', wrapW:'180px', imgH:'40px', logo:'img/clienti/Logo%20DentacomCMYK%5B1%5D.jpg',    g:'linear-gradient(90deg,#0F2347 0%,#1B3A6B 50%,#2B5FA0 100%)', v:{'--blue':'#1B3A6B','--blue-dark':'#0F2347','--teal':'#2B5FA0','--teal-light':'#E5EBF5'} },
+    'master-tecnik':{ name:'Master Tecnik Srl',         sub:'Tecnologie Dentali', wrapW:'140px', imgH:'36px', logo:'img/clienti/Master_Tecnik_Logo%20Nuovo.jpg', g:'linear-gradient(90deg,#1A4A8A 0%,#2366B4 60%,#3D3D3D 100%)', v:{'--blue':'#2366B4','--blue-dark':'#1A4A8A','--teal':'#2366B4','--teal-light':'#E3EEFF'} }
   };
   const k = new URLSearchParams(window.location.search).get('client');
   if (!k || !C[k]) return;
@@ -458,7 +458,7 @@ legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
     const hdr = document.querySelector('header');
     if (hdr) hdr.style.background = cfg.g;
     const lm = document.querySelector('.logo-mark');
-    if (lm) { const w=document.createElement('div'); w.className='client-logo-wrap'; w.innerHTML='<img src="'+cfg.logo+'" alt="'+cfg.name+'">'; lm.replaceWith(w); }
+    if (lm) { const w=document.createElement('div'); w.className='client-logo-wrap'; if(cfg.wrapW){w.style.maxWidth=cfg.wrapW;w.style.minWidth=cfg.wrapW;} const imgEl=document.createElement('img'); imgEl.src=cfg.logo; imgEl.alt=cfg.name; if(cfg.imgH)imgEl.style.maxHeight=cfg.imgH; w.appendChild(imgEl); lm.replaceWith(w); }
     const t = document.querySelector('.header-title'); if (t) t.textContent = cfg.name;
     const s = document.querySelector('.header-sub'); if (s) s.textContent = cfg.sub;
     document.title = cfg.name + ' — Selezione Resine 3D';
