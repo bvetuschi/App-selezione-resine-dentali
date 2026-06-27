@@ -1,8 +1,26 @@
+<!--
+═══════════════════════════════════════════════════════════════════════════
+PROPRIETARY SOFTWARE — DO NOT COPY
+© 2026 Barbara Vetuschi — All Rights Reserved
+Contact: connect@dentaltechpro.eu
+Official site: https://bvetuschi.github.io/App-selezione-resine-dentali/
+ID: BV-APP-RESINE-2026-v1.0
+Hash: dentaltechpro-eu-bvetuschi-resine-3d-property
+
+ATTENZIONE: Software proprietario. La riproduzione, copia, modifica,
+distribuzione o utilizzo non autorizzato sono perseguibili a norma di
+legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
+2001/29/CE). Per licenze d'uso commerciale: connect@dentaltechpro.eu
+═══════════════════════════════════════════════════════════════════════════
+-->
 <!DOCTYPE html>
 <html lang="it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Barbara Vetuschi">
+<meta name="copyright" content="© 2026 Barbara Vetuschi - All Rights Reserved">
+<meta name="contact" content="connect@dentaltechpro.eu">
 <title>Selezione Resine Dentali 3D</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -54,6 +72,25 @@
     align-items: center;
     gap: 14px;
   }
+  /* Client logo in header */
+  .client-logo-wrap {
+    background: white;
+    border-radius: 6px;
+    padding: 4px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    min-width: 80px;
+    max-width: 180px;
+  }
+  .client-logo-wrap img {
+    max-height: 36px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+  }
+
   .logo-mark {
     width: 40px; height: 40px;
     background: rgba(255,255,255,0.15);
@@ -368,6 +405,32 @@
 </div>
 
 <script>
+// =========================================================
+// CLIENT BRANDING (?client=taberna|blu-dental|dentacom|master-tecnik)
+// =========================================================
+(function() {
+  const C = {
+    'taberna':      { name:'Taberna Forniture Dentali', sub:'Forniture Dentali',        logo:'img/clienti/taberna.png',       g:'linear-gradient(90deg,#1D7272 0%,#2B9B9B 50%,#3DBDBD 100%)', v:{'--blue':'#2B9B9B','--blue-dark':'#1D7272','--teal':'#1D9090','--teal-light':'#E0F5F5'} },
+    'blu-dental':   { name:'Blu Dental Group Srl',      sub:'Gruppo Dentale',           logo:'img/clienti/blu-dental.png',    g:'linear-gradient(90deg,#0E2F6B 0%,#1A4BA0 50%,#2060C0 100%)', v:{'--blue':'#1A4BA0','--blue-dark':'#0E2F6B','--teal':'#2060C0','--teal-light':'#E3EEFF'} },
+    'dentacom':     { name:'Dentacom Srl',              sub:'Tecnologie Dentali Avanzate',logo:'img/clienti/dentacom.png',    g:'linear-gradient(90deg,#0F2347 0%,#1B3A6B 50%,#2B5FA0 100%)', v:{'--blue':'#1B3A6B','--blue-dark':'#0F2347','--teal':'#2B5FA0','--teal-light':'#E5EBF5'} },
+    'master-tecnik':{ name:'Master Tecnik Srl',         sub:'Tecnologie Dentali',       logo:'img/clienti/master-tecnik.png', g:'linear-gradient(90deg,#1A4A8A 0%,#2366B4 60%,#3D3D3D 100%)', v:{'--blue':'#2366B4','--blue-dark':'#1A4A8A','--teal':'#2366B4','--teal-light':'#E3EEFF'} }
+  };
+  const k = new URLSearchParams(window.location.search).get('client');
+  if (!k || !C[k]) return;
+  const cfg = C[k];
+  const r = document.documentElement;
+  Object.entries(cfg.v).forEach(([p,v]) => r.style.setProperty(p,v));
+  document.addEventListener('DOMContentLoaded', function() {
+    const hdr = document.querySelector('header');
+    if (hdr) hdr.style.background = cfg.g;
+    const lm = document.querySelector('.logo-mark');
+    if (lm) { const w=document.createElement('div'); w.className='client-logo-wrap'; w.innerHTML='<img src="'+cfg.logo+'" alt="'+cfg.name+'">'; lm.replaceWith(w); }
+    const t = document.querySelector('.header-title'); if (t) t.textContent = cfg.name;
+    const s = document.querySelector('.header-sub'); if (s) s.textContent = cfg.sub;
+    document.title = cfg.name + ' — Selezione Resine 3D';
+  });
+})();
+
 const RESINS = [
   { brand:"ASIGA",brandKey:"asiga",name:"DentaMODEL",tagline:"Modelli di Studio",desc:"Altissima precisione dimensionale per modelli anatomici di studio e di lavoro. Superfici lisce per riproduzioni fedeli del marzocchino.",apps:["Modelli di studio","Modelli di lavoro"],printers:[{label:"Asiga Max 2",type:"asiga"},{label:"Asiga Ultra",type:"asiga"}],mdr:null,color:"#E67E22"},
   { brand:"ASIGA",brandKey:"asiga",name:"DentaSTUDY",tagline:"Modelli Diagnostici",desc:"Resina bianca economica per modelli diagnostici e comunicazione col paziente. Alta produttività grazie a tempi di stampa ridotti.",apps:["Modelli di studio","Modelli diagnostici"],printers:[{label:"Asiga Max 2",type:"asiga"},{label:"Asiga Ultra",type:"asiga"}],mdr:null,color:"#E67E22"},
@@ -523,5 +586,11 @@ document.addEventListener("DOMContentLoaded",()=>{
   render();
 });
 </script>
+
+<div style="text-align:center;padding:16px 20px;margin:0 auto 24px;max-width:1100px;border-top:1px solid #ddd;font-size:11px;color:#aaa;font-family:Arial,sans-serif;line-height:1.6">
+  <strong style="color:#888">⚠️ Strumento proprietario di Barbara Vetuschi</strong> — © 2026 Tutti i diritti riservati<br>
+  Riproduzione, copia, modifica o utilizzo non autorizzato perseguibili a norma di legge (L. 633/1941 sul diritto d'autore, art. 2598 c.c. concorrenza sleale).<br>
+  Per richieste di licenza d'uso commerciale o personalizzazione white-label: <a href="mailto:connect@dentaltechpro.eu" style="color:#aaa;">connect@dentaltechpro.eu</a>
+</div>
 </body>
 </html>
