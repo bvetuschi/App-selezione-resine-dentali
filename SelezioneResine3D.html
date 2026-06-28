@@ -320,6 +320,7 @@ legge italiana (L. 633/1941; art. 2598 c.c.) e internazionale (Direttiva
     font-weight: 600;
     border: 1.5px solid;
   }
+  .form4b-note{font-size:11px;color:#999;margin:4px 0 0 2px;font-style:italic;}
   .printer-pill.asiga    { color: var(--brand-asiga); border-color: #F5CBA7; background: #FEF9F5; }
   .printer-pill.formlabs { color: #333; border-color: #CACACA; background: #F7F7F7; }
 
@@ -602,10 +603,12 @@ function getCardImage(name,apps){if(RESIN_IMAGES[name])return RESIN_IMAGES[name]
 function renderCard(r){
   const appChips=r.apps.map(a=>`<span class="app-chip">${a}</span>`).join("");
   const printerPills=r.printers.map(p=>`<span class="printer-pill ${p.type}">${p.label}</span>`).join("");
+  const hasForm4B=r.printers.some(p=>p.label==="Form 4B"||p.label==="Form 4BL");
+  const form4bNote=hasForm4B?'<p class="form4b-note">ℹ️ Tutte le resine previste per Form 4 sono automaticamente compatibili con Form 4B</p>':''
   const mdrBadge=r.mdr?`<span class="mdr-badge">MDR ${r.mdr}</span>`:"";
   const imgUrl=getCardImage(r.name,r.apps);
   const imgHtml=imgUrl?`<img class="card-img" src="${imgUrl}" alt="${r.apps[0]}" loading="lazy">`:`<div class="card-img" style="background:linear-gradient(135deg,${r.color}22,${r.color}44)"></div>`;
-  return`<div class="card">${imgHtml}<div class="card-accent" style="background:${r.color}"></div><div class="card-body"><div class="card-brand-row"><span class="brand-badge" style="background:${r.color}">${r.brand}</span>${mdrBadge}</div><div class="card-name">${r.name}</div><div class="card-tagline">${r.tagline}</div><div class="card-desc">${r.desc}</div><div class="apps-row">${appChips}</div></div><div class="card-footer"><div class="printers-row">${printerPills}</div><a class="card-contact-btn" href="${getContactMailto(r.name)}">✉️ Richiedi info / preventivo</a></div></div>`;
+  return`<div class="card">${imgHtml}<div class="card-accent" style="background:${r.color}"></div><div class="card-body"><div class="card-brand-row"><span class="brand-badge" style="background:${r.color}">${r.brand}</span>${mdrBadge}</div><div class="card-name">${r.name}</div><div class="card-tagline">${r.tagline}</div><div class="card-desc">${r.desc}</div><div class="apps-row">${appChips}</div></div><div class="card-footer"><div class="printers-row">${printerPills}</div>${form4bNote}<a class="card-contact-btn" href="${getContactMailto(r.name)}">✉️ Richiedi info / preventivo</a></div></div>`;
 }
 
 function render(){
